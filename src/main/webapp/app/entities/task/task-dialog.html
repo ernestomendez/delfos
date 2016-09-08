@@ -1,0 +1,158 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTaskLabel" translate="delfosApp.task.home.createOrEditLabel">Create or edit a Task</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.task.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.task.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.task.name"
+                    required ng-maxlength="400" />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="400">
+                    This field cannot be longer than 400 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.phase" for="field_phase">Phase</label>
+            <input type="text" class="form-control" name="phase" id="field_phase"
+                    ng-model="vm.task.phase"
+                    required />
+            <div ng-show="editForm.phase.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.phase.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.assignedTo" for="field_assignedTo">Assigned To</label>
+            <input type="text" class="form-control" name="assignedTo" id="field_assignedTo"
+                    ng-model="vm.task.assignedTo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.notes" for="field_notes">Notes</label>
+            <input type="text" class="form-control" name="notes" id="field_notes"
+                    ng-model="vm.task.notes"
+                    ng-maxlength="3000" />
+            <div ng-show="editForm.notes.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.notes.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="3000">
+                    This field cannot be longer than 3000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.status" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                    ng-model="vm.task.status"
+                    required />
+            <div ng-show="editForm.status.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.status.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.startDate" for="field_startDate">Start Date</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.endDate" for="field_endDate">End Date</label>
+                <div class="input-group">
+                    <input id="field_endDate" type="text" class="form-control" name="endDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.estimatedTime" for="field_estimatedTime">Estimated Time</label>
+            <input type="number" class="form-control" name="estimatedTime" id="field_estimatedTime"
+                    ng-model="vm.task.estimatedTime"
+                    required />
+            <div ng-show="editForm.estimatedTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.estimatedTime.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.estimatedTime.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.calculatedEndDate" for="field_calculatedEndDate">Calculated End Date</label>
+                <div class="input-group">
+                    <input id="field_calculatedEndDate" type="text" class="form-control" name="calculatedEndDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.calculatedEndDate" is-open="vm.datePickerOpenStatus.calculatedEndDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('calculatedEndDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.activity" for="field_activity">Activity</label>
+            <input type="text" class="form-control" name="activity" id="field_activity"
+                    ng-model="vm.task.activity"
+                    required />
+            <div ng-show="editForm.activity.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.activity.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="delfosApp.task.crationDate" for="field_crationDate">Cration Date</label>
+                <div class="input-group">
+                    <input id="field_crationDate" type="text" class="form-control" name="crationDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.crationDate" is-open="vm.datePickerOpenStatus.crationDate"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('crationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.crationDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.crationDate.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

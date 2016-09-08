@@ -1,0 +1,32 @@
+{
+    "delfosApp": {
+        "task" : {
+            "home": {
+                "title": "Tasks",
+                "createLabel": "Crear nuevo Task",
+                "createOrEditLabel": "Crear o editar Task",
+                "search": "Search for Task"
+            },
+            "created": "Un nuevo Task ha sido creado con el identificador {{ param }}",
+            "updated": "Un Task ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Task ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Task {{ id }}?"
+            },
+            "detail": {
+                "title": "Task"
+            },
+            "name": "Name",
+            "phase": "Phase",
+            "assignedTo": "Assigned To",
+            "notes": "Notes",
+            "status": "Status",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "estimatedTime": "Estimated Time",
+            "calculatedEndDate": "Calculated End Date",
+            "activity": "Activity",
+            "crationDate": "Cration Date"
+        }
+    }
+}

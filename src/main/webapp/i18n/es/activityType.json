@@ -1,0 +1,9 @@
+{
+    "delfosApp": {
+        "ActivityType" : {
+            "null": "",
+            "Activity": "Activity",
+            "Story": "Story"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+version: '2'
+services:
+    delfos-mongodb:
+        container_name: delfos-mongodb
+        image: mongo:3.3.9
+        ports:
+            - "27017:27017"
+        # volumes:
+        #     - ~/volumes/jhipster/delfos/mongodb/:/data/db/

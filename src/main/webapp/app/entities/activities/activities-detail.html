@@ -1,0 +1,87 @@
+
+<div>
+    <h2><span translate="delfosApp.activities.detail.title">Activities</span> {{vm.activities.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="delfosApp.activities.name">Name</span></dt>
+        <dd>
+            <span>{{vm.activities.name}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.description">Description</span></dt>
+        <dd>
+            <span>{{vm.activities.description}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.acceptanceCriteria">Acceptance Criteria</span></dt>
+        <dd>
+            <span>{{vm.activities.acceptanceCriteria}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.assignedTo">Assigned To</span></dt>
+        <dd>
+            <span>{{vm.activities.assignedTo}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.project">Project</span></dt>
+        <dd>
+            <span>{{vm.activities.project}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.storyPoints">Story Points</span></dt>
+        <dd>
+            <span>{{vm.activities.storyPoints}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.sprint_week">Sprint Week</span></dt>
+        <dd>
+            <span>{{vm.activities.sprint_week}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.activities.creationDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.estimatedTime">Estimated Time</span></dt>
+        <dd>
+            <span>{{vm.activities.estimatedTime}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.wokingTime">Woking Time</span></dt>
+        <dd>
+            <span>{{vm.activities.wokingTime}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.remainingTime">Remaining Time</span></dt>
+        <dd>
+            <span>{{vm.activities.remainingTime}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.activities.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.activities.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.calculatedEndDate">Calculated End Date</span></dt>
+        <dd>
+            <span>{{vm.activities.calculatedEndDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.status">Status</span></dt>
+        <dd>
+            <span translate="{{'delfosApp.ActivityStatus.' + vm.activities.status}}">{{vm.activities.status}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.type">Type</span></dt>
+        <dd>
+            <span translate="{{'delfosApp.ActivityType.' + vm.activities.type}}">{{vm.activities.type}}</span>
+        </dd>
+        <dt><span translate="delfosApp.activities.notes">Notes</span></dt>
+        <dd>
+            <span>{{vm.activities.notes}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="activities-detail.edit({id:vm.activities.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

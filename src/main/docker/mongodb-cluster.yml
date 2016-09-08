@@ -1,0 +1,17 @@
+version: '2'
+services:
+    delfos-mongodb:
+        container_name: delfos-mongodb
+        image: mongo:3.3.9
+        ports:
+            - "27017:27017"
+        command: mongos --configdb delfos-mongodb-config
+    delfos-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    delfos-mongodb-config:
+        image: mongo:mongo:3.3.9
+        container_name: delfos-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

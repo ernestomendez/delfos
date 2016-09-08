@@ -1,0 +1,26 @@
+{
+    "delfosApp": {
+        "projects" : {
+            "home": {
+                "title": "Projects",
+                "createLabel": "Crear nuevo Projects",
+                "createOrEditLabel": "Crear o editar Projects",
+                "search": "Search for Projects"
+            },
+            "created": "Un nuevo Projects ha sido creado con el identificador {{ param }}",
+            "updated": "Un Projects ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Projects ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Projects {{ id }}?"
+            },
+            "detail": {
+                "title": "Projects"
+            },
+            "name": "Name",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "estimatedEndDate": "Estimated End Date",
+            "status": "Status"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "delfosApp": {
+        "activities" : {
+            "home": {
+                "title": "Activities",
+                "createLabel": "Crear nuevo Activities",
+                "createOrEditLabel": "Crear o editar Activities",
+                "search": "Search for Activities"
+            },
+            "created": "Un nuevo Activities ha sido creado con el identificador {{ param }}",
+            "updated": "Un Activities ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Activities ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Activities {{ id }}?"
+            },
+            "detail": {
+                "title": "Activities"
+            },
+            "name": "Name",
+            "description": "Description",
+            "acceptanceCriteria": "Acceptance Criteria",
+            "assignedTo": "Assigned To",
+            "project": "Project",
+            "storyPoints": "Story Points",
+            "sprint_week": "Sprint Week",
+            "creationDate": "Creation Date",
+            "estimatedTime": "Estimated Time",
+            "wokingTime": "Woking Time",
+            "remainingTime": "Remaining Time",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "calculatedEndDate": "Calculated End Date",
+            "status": "Status",
+            "type": "Type",
+            "notes": "Notes"
+        }
+    }
+}

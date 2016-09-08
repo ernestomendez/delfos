@@ -1,0 +1,80 @@
+<div>
+    <h2 translate="delfosApp.task.home.title">Tasks</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="task.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="delfosApp.task.home.createLabel">
+                        Create new Task
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="delfosApp.task.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phase"><span translate="delfosApp.task.phase">Phase</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignedTo"><span translate="delfosApp.task.assignedTo">Assigned To</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="notes"><span translate="delfosApp.task.notes">Notes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span translate="delfosApp.task.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span translate="delfosApp.task.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDate"><span translate="delfosApp.task.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estimatedTime"><span translate="delfosApp.task.estimatedTime">Estimated Time</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="calculatedEndDate"><span translate="delfosApp.task.calculatedEndDate">Calculated End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="activity"><span translate="delfosApp.task.activity">Activity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="crationDate"><span translate="delfosApp.task.crationDate">Cration Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in vm.tasks track by task.id">
+                    <td><a ui-sref="task-detail({id:task.id})">{{task.id}}</a></td>
+                    <td>{{task.name}}</td>
+                    <td>{{task.phase}}</td>
+                    <td>{{task.assignedTo}}</td>
+                    <td>{{task.notes}}</td>
+                    <td>{{task.status}}</td>
+                        <td>{{task.startDate | date:'mediumDate'}}</td>
+                        <td>{{task.endDate | date:'mediumDate'}}</td>
+                    <td>{{task.estimatedTime}}</td>
+                        <td>{{task.calculatedEndDate | date:'mediumDate'}}</td>
+                    <td>{{task.activity}}</td>
+                        <td>{{task.crationDate | date:'mediumDate'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="task-detail({id:task.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="task.edit({id:task.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="task.delete({id:task.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

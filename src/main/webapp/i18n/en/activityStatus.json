@@ -1,0 +1,14 @@
+{
+    "delfosApp": {
+        "ActivityStatus" : {
+            "null": "",
+            "Proposed": "Proposed",
+            "Accepted": "Accepted",
+            "Working": "Working",
+            "Rejected": "Rejected",
+            "Canceled": "Canceled",
+            "Finished": "Finished",
+            "Done": "Done"
+        }
+    }
+}

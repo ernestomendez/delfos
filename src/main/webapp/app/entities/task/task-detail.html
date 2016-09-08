@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span translate="delfosApp.task.detail.title">Task</span> {{vm.task.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="delfosApp.task.name">Name</span></dt>
+        <dd>
+            <span>{{vm.task.name}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.phase">Phase</span></dt>
+        <dd>
+            <span>{{vm.task.phase}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.assignedTo">Assigned To</span></dt>
+        <dd>
+            <span>{{vm.task.assignedTo}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.notes">Notes</span></dt>
+        <dd>
+            <span>{{vm.task.notes}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.status">Status</span></dt>
+        <dd>
+            <span>{{vm.task.status}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.task.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.task.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.estimatedTime">Estimated Time</span></dt>
+        <dd>
+            <span>{{vm.task.estimatedTime}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.calculatedEndDate">Calculated End Date</span></dt>
+        <dd>
+            <span>{{vm.task.calculatedEndDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.activity">Activity</span></dt>
+        <dd>
+            <span>{{vm.task.activity}}</span>
+        </dd>
+        <dt><span translate="delfosApp.task.crationDate">Cration Date</span></dt>
+        <dd>
+            <span>{{vm.task.crationDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="task-detail.edit({id:vm.task.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

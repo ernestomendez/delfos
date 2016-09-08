@@ -1,0 +1,11 @@
+{
+    "delfosApp": {
+        "ProjectStatus" : {
+            "null": "",
+            "Proposal": "Proposal",
+            "Working": "Working",
+            "Delivered": "Delivered",
+            "Closed": "Closed"
+        }
+    }
+}
