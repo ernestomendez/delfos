@@ -26,13 +26,6 @@
             ]
         },
         {
-            "fieldName": "estimatedEndDate",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "status",
             "fieldType": "ProjectStatus",
             "fieldValues": "Proposal,Working,Delivered,Closed",

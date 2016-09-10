@@ -37,10 +37,6 @@ public class Projects implements Serializable {
     private LocalDate endDate;
 
     @NotNull
-    @Field("estimated_end_date")
-    private LocalDate estimatedEndDate;
-
-    @NotNull
     @Field("status")
     private ProjectStatus status;
 
@@ -91,19 +87,6 @@ public class Projects implements Serializable {
         this.endDate = endDate;
     }
 
-    public LocalDate getEstimatedEndDate() {
-        return estimatedEndDate;
-    }
-
-    public Projects estimatedEndDate(LocalDate estimatedEndDate) {
-        this.estimatedEndDate = estimatedEndDate;
-        return this;
-    }
-
-    public void setEstimatedEndDate(LocalDate estimatedEndDate) {
-        this.estimatedEndDate = estimatedEndDate;
-    }
-
     public ProjectStatus getStatus() {
         return status;
     }
@@ -144,7 +127,6 @@ public class Projects implements Serializable {
             ", name='" + name + "'" +
             ", startDate='" + startDate + "'" +
             ", endDate='" + endDate + "'" +
-            ", estimatedEndDate='" + estimatedEndDate + "'" +
             ", status='" + status + "'" +
             '}';
     }

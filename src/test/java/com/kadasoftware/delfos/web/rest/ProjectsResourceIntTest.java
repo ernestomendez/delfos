@@ -47,9 +47,6 @@ public class ProjectsResourceIntTest {
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_ESTIMATED_END_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_ESTIMATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
-
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.Proposal;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.Working;
 
@@ -91,7 +88,6 @@ public class ProjectsResourceIntTest {
                 .name(DEFAULT_NAME)
                 .startDate(DEFAULT_START_DATE)
                 .endDate(DEFAULT_END_DATE)
-                .estimatedEndDate(DEFAULT_ESTIMATED_END_DATE)
                 .status(DEFAULT_STATUS);
         return projects;
     }
@@ -120,7 +116,6 @@ public class ProjectsResourceIntTest {
         assertThat(testProjects.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProjects.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testProjects.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testProjects.getEstimatedEndDate()).isEqualTo(DEFAULT_ESTIMATED_END_DATE);
         assertThat(testProjects.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
@@ -176,23 +171,6 @@ public class ProjectsResourceIntTest {
     }
 
     @Test
-    public void checkEstimatedEndDateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = projectsRepository.findAll().size();
-        // set the field null
-        projects.setEstimatedEndDate(null);
-
-        // Create the Projects, which fails.
-
-        restProjectsMockMvc.perform(post("/api/projects")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(projects)))
-                .andExpect(status().isBadRequest());
-
-        List<Projects> projects = projectsRepository.findAll();
-        assertThat(projects).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = projectsRepository.findAll().size();
         // set the field null
@@ -222,7 +200,6 @@ public class ProjectsResourceIntTest {
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
                 .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-                .andExpect(jsonPath("$.[*].estimatedEndDate").value(hasItem(DEFAULT_ESTIMATED_END_DATE.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
@@ -239,7 +216,6 @@ public class ProjectsResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.estimatedEndDate").value(DEFAULT_ESTIMATED_END_DATE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
@@ -263,7 +239,6 @@ public class ProjectsResourceIntTest {
                 .name(UPDATED_NAME)
                 .startDate(UPDATED_START_DATE)
                 .endDate(UPDATED_END_DATE)
-                .estimatedEndDate(UPDATED_ESTIMATED_END_DATE)
                 .status(UPDATED_STATUS);
 
         restProjectsMockMvc.perform(put("/api/projects")
@@ -278,7 +253,6 @@ public class ProjectsResourceIntTest {
         assertThat(testProjects.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProjects.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testProjects.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testProjects.getEstimatedEndDate()).isEqualTo(UPDATED_ESTIMATED_END_DATE);
         assertThat(testProjects.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 

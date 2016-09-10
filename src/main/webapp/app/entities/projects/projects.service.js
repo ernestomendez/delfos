@@ -18,7 +18,6 @@
                         data = angular.fromJson(data);
                         data.startDate = DateUtils.convertLocalDateFromServer(data.startDate);
                         data.endDate = DateUtils.convertLocalDateFromServer(data.endDate);
-                        data.estimatedEndDate = DateUtils.convertLocalDateFromServer(data.estimatedEndDate);
                     }
                     return data;
                 }
@@ -28,7 +27,6 @@
                 transformRequest: function (data) {
                     data.startDate = DateUtils.convertLocalDateToServer(data.startDate);
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
-                    data.estimatedEndDate = DateUtils.convertLocalDateToServer(data.estimatedEndDate);
                     return angular.toJson(data);
                 }
             },
@@ -37,7 +35,6 @@
                 transformRequest: function (data) {
                     data.startDate = DateUtils.convertLocalDateToServer(data.startDate);
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
-                    data.estimatedEndDate = DateUtils.convertLocalDateToServer(data.estimatedEndDate);
                     return angular.toJson(data);
                 }
             }

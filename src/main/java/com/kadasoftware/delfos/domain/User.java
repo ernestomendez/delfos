@@ -3,6 +3,8 @@ package com.kadasoftware.delfos.domain;
 import com.kadasoftware.delfos.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -18,6 +20,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import java.time.ZonedDateTime;
 
@@ -27,7 +30,7 @@ import java.time.ZonedDateTime;
 @Document(collection = "jhi_user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = - 764233378136894317L;
 
     @Id
     private String id;
@@ -71,6 +74,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Field("reset_date")
     private ZonedDateTime resetDate = null;
+
+    @Field
+    private Set<String> projects = new HashSet<>();
 
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
@@ -172,39 +178,47 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+    public Set<String> getProjects() {
+        return projects;
+    }
 
-        User user = (User) o;
-
-        if (!login.equals(user.login)) {
-            return false;
-        }
-
-        return true;
+    public void setProjects(final Set<String> projects) {
+        this.projects = projects;
     }
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+        return Objects.hash(id, login, firstName, lastName, email, activated, projects);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        return Objects.equals(this.id, other.id) && Objects
+            .equals(this.login, other.login) && Objects
+            .equals(this.firstName, other.firstName) && Objects
+            .equals(this.lastName, other.lastName) && Objects
+            .equals(this.email, other.email) && Objects
+            .equals(this.activated, other.activated) && Objects
+            .equals(this.projects, other.projects);
     }
 
     @Override
     public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
+        return new ToStringBuilder(this).appendSuper(super.toString()).append("id", id)
+                                        .append("login", login).append("password", password)
+                                        .append("firstName", firstName).append("lastName", lastName)
+                                        .append("email", email).append("activated", activated)
+                                        .append("langKey", langKey)
+                                        .append("activationKey", activationKey)
+                                        .append("resetKey", resetKey).append("resetDate", resetDate)
+                                        .append("projects", projects)
+                                        .append("authorities", authorities).toString();
     }
 }

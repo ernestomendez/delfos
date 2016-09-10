@@ -16,7 +16,7 @@ import java.util.Objects;
 @Document(collection = "task")
 public class Task implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7266863562706272589L;
 
     @Id
     private String id;

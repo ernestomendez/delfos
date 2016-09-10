@@ -129,7 +129,6 @@
                                 name: null,
                                 startDate: null,
                                 endDate: null,
-                                estimatedEndDate: null,
                                 status: null,
                                 id: null
                             };

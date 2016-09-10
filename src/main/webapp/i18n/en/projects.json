@@ -19,7 +19,6 @@
             "name": "Name",
             "startDate": "Start Date",
             "endDate": "End Date",
-            "estimatedEndDate": "Estimated End Date",
             "status": "Status"
         }
     }

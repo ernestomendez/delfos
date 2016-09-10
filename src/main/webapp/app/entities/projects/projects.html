@@ -22,7 +22,6 @@
                     <th jh-sort-by="name"><span translate="delfosApp.projects.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span translate="delfosApp.projects.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="endDate"><span translate="delfosApp.projects.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="estimatedEndDate"><span translate="delfosApp.projects.estimatedEndDate">Estimated End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span translate="delfosApp.projects.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -33,7 +32,6 @@
                     <td>{{projects.name}}</td>
                         <td>{{projects.startDate | date:'mediumDate'}}</td>
                         <td>{{projects.endDate | date:'mediumDate'}}</td>
-                        <td>{{projects.estimatedEndDate | date:'mediumDate'}}</td>
                     <td translate="{{'delfosApp.ProjectStatus.' + projects.status}}">{{projects.status}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
