@@ -1,0 +1,10 @@
+{
+    "delfosApp": {
+        "dashboard": {
+            "projects": {
+                "title": "Proyectos",
+                "selectLabel": "Seleccione un proyecto"
+            }
+        }
+    }
+}

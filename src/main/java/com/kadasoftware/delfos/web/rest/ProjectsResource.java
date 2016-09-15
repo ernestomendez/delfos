@@ -3,6 +3,7 @@ package com.kadasoftware.delfos.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.kadasoftware.delfos.domain.Projects;
 import com.kadasoftware.delfos.service.ProjectsService;
+import com.kadasoftware.delfos.service.UserService;
 import com.kadasoftware.delfos.web.rest.util.HeaderUtil;
 import com.kadasoftware.delfos.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -30,9 +31,12 @@ import java.util.Optional;
 public class ProjectsResource {
 
     private final Logger log = LoggerFactory.getLogger(ProjectsResource.class);
-        
+
     @Inject
     private ProjectsService projectsService;
+
+    @Inject
+    private UserService userService;
 
     /**
      * POST  /projects : Create a new projects.
@@ -134,5 +138,23 @@ public class ProjectsResource {
         projectsService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("projects", id.toString())).build();
     }
+
+/*    /**
+     * GET  /projects : get all the projects.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of projects in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     *//*
+    @RequestMapping(value = "/storydashboard/projects",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Projects>> getProjectsByUser(@PathVariable String login)
+        throws URISyntaxException {
+        log.debug("REST request to get all the  projects by a user");
+        Page<Projects> page = userService
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/projects");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }*/
 
 }

@@ -3,6 +3,7 @@ package com.kadasoftware.delfos.service.dto;
 import com.kadasoftware.delfos.config.Constants;
 
 import com.kadasoftware.delfos.domain.Authority;
+import com.kadasoftware.delfos.domain.Projects;
 import com.kadasoftware.delfos.domain.User;
 
 import org.hibernate.validator.constraints.Email;
@@ -37,18 +38,21 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Set<String> projects;
+
     public UserDTO() {
     }
 
     public UserDTO(User user) {
         this(user.getLogin(), user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
+            user.getProjects(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
     public UserDTO(String login, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+        String email, boolean activated, String langKey, Set<String> projects, Set<String> authorities) {
 
         this.login = login;
         this.firstName = firstName;
@@ -56,6 +60,7 @@ public class UserDTO {
         this.email = email;
         this.activated = activated;
         this.langKey = langKey;
+        this.projects = projects;
         this.authorities = authorities;
     }
 
@@ -87,6 +92,10 @@ public class UserDTO {
         return authorities;
     }
 
+    public Set<String> getProjects() {
+        return projects;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -96,6 +105,7 @@ public class UserDTO {
             ", email='" + email + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
+            ", projects='" + projects + '\'' +
             ", authorities=" + authorities +
             "}";
     }

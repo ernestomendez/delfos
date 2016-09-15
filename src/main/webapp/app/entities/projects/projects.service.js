@@ -37,6 +37,14 @@
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
                     return angular.toJson(data);
                 }
+            },
+            'byLogin': {
+                method: 'GET',
+                url: 'api/storydashboard/projects?login=:login',
+                params: {
+                    login: null
+                },
+                isArray: true
             }
         });
     }
