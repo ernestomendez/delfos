@@ -8,46 +8,58 @@
         .module('delfosApp')
         .controller('ProjectsDashboardController', ProjectsDashboardController);
 
-    ProjectsDashboardController.$inject = ['$scope', '$state', 'Principal', 'Projects'];
+    ProjectsDashboardController.$inject = ['$scope', '$state', 'Principal', 'Projects', 'SharedData'];
 
-    function ProjectsDashboardController($scope, $state, Principal, Projects) {
+    function ProjectsDashboardController($scope, $state, Principal, Projects, SharedData) {
         var vm = this;
         vm.loadProjectsByEngineer = loadProjectsByEngineer;
         vm.account = null;
+        vm.project = null;
+        vm.sprint = null;
+        vm.goToNext = goToNext;
+
+        vm.SharedData = SharedData;
 
         vm.loadProjectsByEngineer();
 
         function loadProjectsByEngineer() {
-            console.log("loadProjectsByEngineer");
             getAccount();
 
-            Projects.byLogin({
-                login: vm.account.login
-            },onSuccess, onError);
-            //
-            // Task.byDates({
-            //         projectId: vm.selectedProject.id,
-            //         startDate: DateUtils.convertLocalDateToServer(startOfWeek),
-            //         endDate: DateUtils.convertLocalDateToServer(endOfWeek)},
-            //     onSuccess, onError);
-
-            function onSuccess(data, headers) {
-                vm.projects = data;
-                console.log(vm.projects);
-            }
-            function onError(error) {
-                AlertService.error(error.data.message);
-            }
-
         }
-
-
 
         function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
-                console.log("?????????????????????????????????????", vm.account);
+
+                Projects.byLogin({
+                    login: vm.account.login
+                },onSuccess, onError);
+
+                function onSuccess(data, headers) {
+                    vm.projects = data;
+                    vm.SharedData.Project = vm.projects[0];
+
+                }
+                function onError(error) {
+                    AlertService.error(error.data.message);
+                }
             });
+        }
+
+        vm.sprintOptions = [{'sprint': 'Backlog'}, {'sprint': 'Sprint Active'}];
+
+
+        function goToNext() {
+            console.log(vm.sprint);
+            if(vm.sprint === 'Backlog') {
+                console.log("backlog");
+                $state.go('backlogAssignStories',{project: vm.SharedData.Project.name});
+            } else {
+                console.log("sprint");
+
+            }
+
+            // $state.go();
         }
 
     }

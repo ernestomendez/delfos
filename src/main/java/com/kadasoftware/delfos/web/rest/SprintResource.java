@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,7 @@ import java.util.Optional;
 public class SprintResource {
 
     private final Logger log = LoggerFactory.getLogger(SprintResource.class);
-        
+
     @Inject
     private SprintService sprintService;
 
@@ -133,6 +135,23 @@ public class SprintResource {
         log.debug("REST request to delete Sprint : {}", id);
         sprintService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("sprint", id.toString())).build();
+    }
+
+
+    @RequestMapping(value = "/project/{project}/sprints/active",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Sprint>> getActiveSprints(@PathVariable String project,
+                                                         @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Sprints");
+        log.debug("***************************************************************************");
+        log.debug(date.toString());
+        log.debug("***************************************************************************");
+
+        List<Sprint> sprints = sprintService.findTodayAllActiveSprints(project, date);
+        return new ResponseEntity<>(sprints, HttpStatus.OK);
     }
 
 }

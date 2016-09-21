@@ -33,6 +33,27 @@
                     return $translate.refresh();
                 }]
             }
+        })
+        .state('backlogAssignStories', {
+            parent: 'dashboardProjects',
+            url:'{project}/backlog',
+            data: {
+                authorities: ['ROLE_ADMIN'],
+                pageTitle: 'delfosApp.dashboard.projects.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/storiesDashboard/backlog.stories.html',
+                    controller: 'BacklogStoriesController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('storiesDashboard');
+                    return $translate.refresh();
+                }]
+            }
         });
     }
 })();

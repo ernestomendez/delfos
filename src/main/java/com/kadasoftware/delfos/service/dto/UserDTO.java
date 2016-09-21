@@ -3,7 +3,6 @@ package com.kadasoftware.delfos.service.dto;
 import com.kadasoftware.delfos.config.Constants;
 
 import com.kadasoftware.delfos.domain.Authority;
-import com.kadasoftware.delfos.domain.Projects;
 import com.kadasoftware.delfos.domain.User;
 
 import org.hibernate.validator.constraints.Email;

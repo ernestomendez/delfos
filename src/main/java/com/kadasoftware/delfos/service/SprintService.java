@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 public class SprintService {
 
     private final Logger log = LoggerFactory.getLogger(SprintService.class);
-    
+
     @Inject
     private SprintRepository sprintRepository;
 
@@ -36,7 +37,7 @@ public class SprintService {
 
     /**
      *  Get all the sprints.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -66,5 +67,15 @@ public class SprintService {
     public void delete(String id) {
         log.debug("Request to delete Sprint : {}", id);
         sprintRepository.delete(id);
+    }
+
+    /**
+     * Finds all the active sprints, today.
+     * @return list of active sprints.
+     */
+    public List<Sprint> findTodayAllActiveSprints(String project, LocalDate day) {
+        log.debug("Request to get all active sprints of today");
+
+        return sprintRepository.findByProjectAndStartDateBeforeAndEndDateAfter(project, day, day);
     }
 }

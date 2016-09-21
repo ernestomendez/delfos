@@ -1,3 +1,36 @@
 <div>
-    projectos.
+    <form class="form-horizontal" ng-submit="vm.goToNext()">
+        <fieldset>
+
+            <!-- Form Name -->
+    <legend translate="delfosApp.dashboard.projects.selectLabel"></legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="selectProjects">Projects</label>
+                <div class="col-md-4">
+                    <select id="selectProjects"
+                            class="col-md-4 control-label"
+                            ng-model="vm.SharedData.Project"
+                            ng-options="project.name for project in vm.projects"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Select sprint</label>
+                <div class="col-md-4">
+                    <div class="radio" ng-repeat="option in vm.sprintOptions">
+                <label>
+                <input id="{{option.sprint}}" type="radio" ng-model="vm.sprint" ng-value="option.sprint" ng-required="ng-required" />{{option.sprint}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="continueBtn">Continue</label>
+                <div class="col-md-4">
+                    <button id="continueBtn" class="btn btn-primary">Continue</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>

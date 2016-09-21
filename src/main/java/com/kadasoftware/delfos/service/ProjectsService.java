@@ -2,14 +2,19 @@ package com.kadasoftware.delfos.service;
 
 import com.kadasoftware.delfos.domain.Projects;
 import com.kadasoftware.delfos.repository.ProjectsRepository;
+import com.kadasoftware.delfos.service.dto.UserDTO;
+import com.kadasoftware.delfos.service.dto.UserForProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service Implementation for managing Projects.
@@ -18,9 +23,12 @@ import java.util.List;
 public class ProjectsService {
 
     private final Logger log = LoggerFactory.getLogger(ProjectsService.class);
-    
+
     @Inject
     private ProjectsRepository projectsRepository;
+
+    @Inject
+    private UserService userService;
 
     /**
      * Save a projects.
@@ -30,13 +38,17 @@ public class ProjectsService {
      */
     public Projects save(Projects projects) {
         log.debug("Request to save Projects : {}", projects);
-        Projects result = projectsRepository.save(projects);
-        return result;
+
+        UserForProject user = new UserForProject(userService.getUserWithAuthorities());
+        Set<UserForProject> userDTOSet = new HashSet<>(1);
+        userDTOSet.add(user);
+        projects.setUsers(userDTOSet);
+        return projectsRepository.save(projects);
     }
 
     /**
      *  Get all the projects.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -66,5 +78,15 @@ public class ProjectsService {
     public void delete(String id) {
         log.debug("Request to delete Projects : {}", id);
         projectsRepository.delete(id);
+    }
+
+    public List<Projects> findAllByUser(String login) {
+        log.debug("Request find Projects by login : {}", login);
+        Assert.notNull(login, "login can not be null");
+        UserForProject userForProject = new UserForProject(userService.getUserWithAuthoritiesByLogin(login).get());
+
+        Set<UserForProject> userDTOSet = new HashSet<>(1);
+        userDTOSet.add(userForProject);
+        return projectsRepository.findAllByUsers(userDTOSet);
     }
 }

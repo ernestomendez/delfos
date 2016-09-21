@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * Service Implementation for managing Task.
@@ -18,7 +17,7 @@ import java.util.List;
 public class TaskService {
 
     private final Logger log = LoggerFactory.getLogger(TaskService.class);
-    
+
     @Inject
     private TaskRepository taskRepository;
 
@@ -36,7 +35,7 @@ public class TaskService {
 
     /**
      *  Get all the tasks.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

@@ -4,6 +4,11 @@
             "projects": {
                 "title": "Proyectos",
                 "selectLabel": "Seleccione un proyecto"
+            },
+            "backlog": {
+                "assign": {
+                    "title": "Asignar historias"
+                }
             }
         }
     }

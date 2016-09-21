@@ -139,22 +139,21 @@ public class ProjectsResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("projects", id.toString())).build();
     }
 
-/*    /**
+    /**
      * GET  /projects : get all the projects.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of projects in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     *//*
+     */
     @RequestMapping(value = "/storydashboard/projects",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Projects>> getProjectsByUser(@PathVariable String login)
+    public ResponseEntity<List<Projects>> getProjectsByUser(@RequestParam("login") String login)
         throws URISyntaxException {
         log.debug("REST request to get all the  projects by a user");
-        Page<Projects> page = userService
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/projects");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }*/
+        List<Projects> projects = projectsService.findAllByUser(login);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
 
 }

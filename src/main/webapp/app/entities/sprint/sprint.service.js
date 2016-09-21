@@ -37,6 +37,15 @@
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
                     return angular.toJson(data);
                 }
+            },
+            'actives': {
+                method: 'GET',
+                url: "api/project/:project/sprints/active?date=:date",
+                params: {
+                    project: null,
+                    date: null
+                },
+                isArray: true
             }
         });
     }
