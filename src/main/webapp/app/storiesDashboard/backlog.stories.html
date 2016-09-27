@@ -1,3 +1,59 @@
 <div>
-    hola mundo
+    <form class="form-horizontal" ng-submit="vm.goToNext()">
+        <div class="row simpleDemo">
+            <fieldset>
+                <div class="col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{vm.backlogSprint.name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul dnd-list="vm.backlogStoriesList">
+                                <!-- The dnd-draggable directive makes an element draggable and will
+                                     transfer the object that was assigned to it. If an element was
+                                     dragged away, you have to remove it from the original list
+                                     yourself using the dnd-moved attribute -->
+                                <li ng-repeat="item in vm.backlogStoriesList"
+                                    dnd-draggable="item"
+                                    dnd-moved="vm.backlogStoriesList.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item"
+                                    ng-class="{'selected': models.selected === item}"
+                                    class="ng-binding ng-scope selected" draggable="true"
+                                >
+                                    {{item.name}}
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{vm.activeSprint.name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul dnd-list="vm.sprintStoriesList">
+                                <!-- The dnd-draggable directive makes an element draggable and will
+                                     transfer the object that was assigned to it. If an element was
+                                     dragged away, you have to remove it from the original list
+                                     yourself using the dnd-moved attribute -->
+                                <li ng-repeat="item in vm.sprintStoriesList"
+                                    dnd-draggable="item"
+                                    dnd-moved="vm.sprintStoriesList.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item"
+                                    ng-class="{'selected': models.selected === item}"
+                                    class="ng-binding ng-scope selected" draggable="true"
+                                >
+                                    {{item.name}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </form>
 </div>

@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -30,7 +31,7 @@ import java.util.Optional;
 public class ActivitiesResource {
 
     private final Logger log = LoggerFactory.getLogger(ActivitiesResource.class);
-        
+
     @Inject
     private ActivitiesService activitiesService;
 
@@ -133,6 +134,20 @@ public class ActivitiesResource {
         log.debug("REST request to delete Activities : {}", id);
         activitiesService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("activities", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/project/{project}/sprint/{sprintId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Activities>> getAllActivitiesBySprint(@PathVariable String project, @PathVariable String sprintId) {
+        log.debug("Request to get all activities by project and sprint");
+        Assert.notNull(project, "Project can't be null");
+        Assert.notNull(sprintId, "Sprint can't be null");
+
+        List<Activities> activities = activitiesService.findAllByProjectAndSprintId(project, sprintId);
+
+        return new ResponseEntity(activities, HttpStatus.OK);
     }
 
 }

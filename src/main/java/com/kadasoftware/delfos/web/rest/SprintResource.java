@@ -146,9 +146,6 @@ public class SprintResource {
                                                          @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date)
         throws URISyntaxException {
         log.debug("REST request to get a page of Sprints");
-        log.debug("***************************************************************************");
-        log.debug(date.toString());
-        log.debug("***************************************************************************");
 
         List<Sprint> sprints = sprintService.findTodayAllActiveSprints(project, date);
         return new ResponseEntity<>(sprints, HttpStatus.OK);

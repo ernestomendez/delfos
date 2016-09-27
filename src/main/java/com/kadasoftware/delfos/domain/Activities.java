@@ -48,7 +48,7 @@ public class Activities implements Serializable {
 
     @NotNull
     @Field("sprint_week")
-    private String sprint_week;
+    private String sprintWeek;
 
     @NotNull
     @Field("creation_date")
@@ -170,17 +170,17 @@ public class Activities implements Serializable {
         this.storyPoints = storyPoints;
     }
 
-    public String getSprint_week() {
-        return sprint_week;
+    public String getSprintWeek() {
+        return sprintWeek;
     }
 
     public Activities sprint_week(String sprint_week) {
-        this.sprint_week = sprint_week;
+        this.sprintWeek = sprint_week;
         return this;
     }
 
-    public void setSprint_week(String sprint_week) {
-        this.sprint_week = sprint_week;
+    public void setSprintWeek(String sprintWeek) {
+        this.sprintWeek = sprintWeek;
     }
 
     public LocalDate getCreationDate() {
@@ -343,7 +343,7 @@ public class Activities implements Serializable {
             ", assignedTo='" + assignedTo + "'" +
             ", project='" + project + "'" +
             ", storyPoints='" + storyPoints + "'" +
-            ", sprint_week='" + sprint_week + "'" +
+            ", sprintWeek='" + sprintWeek + "'" +
             ", creationDate='" + creationDate + "'" +
             ", estimatedTime='" + estimatedTime + "'" +
             ", wokingTime='" + wokingTime + "'" +

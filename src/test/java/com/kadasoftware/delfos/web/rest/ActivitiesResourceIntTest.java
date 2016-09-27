@@ -166,7 +166,7 @@ public class ActivitiesResourceIntTest {
         assertThat(testActivities.getAssignedTo()).isEqualTo(DEFAULT_ASSIGNED_TO);
         assertThat(testActivities.getProject()).isEqualTo(DEFAULT_PROJECT);
         assertThat(testActivities.getStoryPoints()).isEqualTo(DEFAULT_STORY_POINTS);
-        assertThat(testActivities.getSprint_week()).isEqualTo(DEFAULT_SPRINT_WEEK);
+        assertThat(testActivities.getSprintWeek()).isEqualTo(DEFAULT_SPRINT_WEEK);
         assertThat(testActivities.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testActivities.getEstimatedTime()).isEqualTo(DEFAULT_ESTIMATED_TIME);
         assertThat(testActivities.getWokingTime()).isEqualTo(DEFAULT_WOKING_TIME);
@@ -217,7 +217,7 @@ public class ActivitiesResourceIntTest {
     public void checkSprint_weekIsRequired() throws Exception {
         int databaseSizeBeforeTest = activitiesRepository.findAll().size();
         // set the field null
-        activities.setSprint_week(null);
+        activities.setSprintWeek(null);
 
         // Create the Activities, which fails.
 
@@ -406,7 +406,7 @@ public class ActivitiesResourceIntTest {
         assertThat(testActivities.getAssignedTo()).isEqualTo(UPDATED_ASSIGNED_TO);
         assertThat(testActivities.getProject()).isEqualTo(UPDATED_PROJECT);
         assertThat(testActivities.getStoryPoints()).isEqualTo(UPDATED_STORY_POINTS);
-        assertThat(testActivities.getSprint_week()).isEqualTo(UPDATED_SPRINT_WEEK);
+        assertThat(testActivities.getSprintWeek()).isEqualTo(UPDATED_SPRINT_WEEK);
         assertThat(testActivities.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testActivities.getEstimatedTime()).isEqualTo(UPDATED_ESTIMATED_TIME);
         assertThat(testActivities.getWokingTime()).isEqualTo(UPDATED_WOKING_TIME);

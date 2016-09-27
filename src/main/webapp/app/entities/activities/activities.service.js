@@ -43,6 +43,15 @@
                     data.calculatedEndDate = DateUtils.convertLocalDateToServer(data.calculatedEndDate);
                     return angular.toJson(data);
                 }
+            },
+            'bySprint': {
+                method: 'GET',
+                url: "api/project/:project/sprint/:sprintId",
+                params: {
+                    project: null,
+                    sprintId: null
+                },
+                isArray: true
             }
         });
     }

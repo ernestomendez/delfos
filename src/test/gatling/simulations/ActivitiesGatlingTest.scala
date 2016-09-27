@@ -67,7 +67,7 @@ class ActivitiesGatlingTest extends Simulation {
             .exec(http("Create new activities")
             .post("/api/activities")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "acceptanceCriteria":"SAMPLE_TEXT", "assignedTo":"SAMPLE_TEXT", "project":"SAMPLE_TEXT", "storyPoints":"0", "sprint_week":"SAMPLE_TEXT", "creationDate":"2020-01-01T00:00:00.000Z", "estimatedTime":"0", "wokingTime":null, "remainingTime":null, "startDate":"2020-01-01T00:00:00.000Z", "endDate":"2020-01-01T00:00:00.000Z", "calculatedEndDate":"2020-01-01T00:00:00.000Z", "status":null, "type":null, "notes":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "acceptanceCriteria":"SAMPLE_TEXT", "assignedTo":"SAMPLE_TEXT", "project":"SAMPLE_TEXT", "storyPoints":"0", "sprintWeek":"SAMPLE_TEXT", "creationDate":"2020-01-01T00:00:00.000Z", "estimatedTime":"0", "wokingTime":null, "remainingTime":null, "startDate":"2020-01-01T00:00:00.000Z", "endDate":"2020-01-01T00:00:00.000Z", "calculatedEndDate":"2020-01-01T00:00:00.000Z", "status":null, "type":null, "notes":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_activities_url"))).exitHereIfFailed
             .pause(10)

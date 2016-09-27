@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ActivitiesService {
 
     private final Logger log = LoggerFactory.getLogger(ActivitiesService.class);
-    
+
     @Inject
     private ActivitiesRepository activitiesRepository;
 
@@ -36,7 +37,7 @@ public class ActivitiesService {
 
     /**
      *  Get all the activities.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -66,5 +67,23 @@ public class ActivitiesService {
     public void delete(String id) {
         log.debug("Request to delete Activities : {}", id);
         activitiesRepository.delete(id);
+    }
+
+    /**
+     * Gets all the activities by a project and a sprint given.
+     *
+     * @param project project name to find.
+     * @param sprintId sprint Id to find.
+     * @return a list of activities given a project and a sprint.
+     */
+    public List<Activities> findAllByProjectAndSprintId(String project, String sprintId) {
+        log.debug("Request to get all the activities by project and sprint");
+        Assert.notNull(project, "project can not be null");
+        Assert.notNull(sprintId, "SprintId can not be null");
+        log.debug(project);
+        log.debug(sprintId);
+        log.debug("*********************************************************");
+
+        return activitiesRepository.findAllByProjectAndSprintWeek(project, sprintId);
     }
 }
