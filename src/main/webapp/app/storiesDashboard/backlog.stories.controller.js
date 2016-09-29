@@ -18,12 +18,14 @@
         vm.backlogSprint = null;
         vm.activeSprint = null;
         vm.getStoriesBySprint = getStoriesBySprint;
-        vm.backlogStoriesList = null;
+        vm.backlogStoriesList = [];
         vm.sprintStoriesList = [];
+        vm.logEvent = logEvent;
+        vm.dropCallback = dropCallback;
 
         vm.models = {
             selected: null,
-            lists: {"A": vm.backlogStoriesList, "B": vm.sprintStoriesList}
+            lists: {}
         };
 
 
@@ -47,12 +49,14 @@
                     vm.activeSprint = data[0];
                 }
 
-                vm.backlogStoriesList = vm.getStoriesBySprint(vm.backlogSprint);
+                vm.models.lists[vm.backlogSprint.name] = vm.getStoriesBySprint(vm.backlogSprint);
+                vm.models.lists[vm.activeSprint.name] = vm.getStoriesBySprint(vm.activeSprint);
             }
 
             function onError(error) {
                 AlertService.error(error.data.message);
             }
+
         }
 
         function getStoriesBySprint(sprint) {
@@ -68,6 +72,41 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
+        }
+
+        function logEvent (message, list) {
+            console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            console.log(message, list);
+            console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        }
+
+        function dropCallback (event, index, item, external, type, allowedType, items, listName) {
+            console.log("event: ", event);
+            console.log("index: ", index);
+            console.log("item: ", item);
+            console.log("external: ", external);
+            console.log("type: ", type);
+            console.log("allowedType: ", allowedType);
+            console.log("items: ", items);
+            console.log("listName", listName);
+
+            // logListEvent('dropped at', event, index, external, type);
+            // if (external) {
+            //     if (allowedType === 'itemType' && !item.label) return false;
+            //     if (allowedType === 'containerType' && !angular.isArray(item)) return false;
+            // }
+            return item;
+        }
+
+        function logListEvent(action, event, index, external, type) {
+            var message = external ? 'External ' : '';
+            message += type + ' element is ' + action + ' position ' + index;
+            vm.logEvent(message, event);
+        }
+
+        function insertedCallback(list, item) {
+            console.log("list: ", list);
+            console.log("item: ", item);
         }
 
     }
