@@ -20,14 +20,12 @@
         vm.getStoriesBySprint = getStoriesBySprint;
         vm.backlogStoriesList = [];
         vm.sprintStoriesList = [];
-        vm.logEvent = logEvent;
+        vm.backLogLogEvent = backLogLogEvent;
+        vm.listBackloglogEvent = listBackloglogEvent;
+        vm.activeSprintLogEvent = activeSprintLogEvent;
+        vm.listSprintlogEvent = listSprintlogEvent;
         vm.dropCallback = dropCallback;
-
-        vm.models = {
-            selected: null,
-            lists: {}
-        };
-
+        vm.selectedStory = null;
 
         function getActiveSprints() {
             var today = DateUtils.convertLocalDateToServer(new Date());
@@ -49,8 +47,8 @@
                     vm.activeSprint = data[0];
                 }
 
-                vm.models.lists[vm.backlogSprint.name] = vm.getStoriesBySprint(vm.backlogSprint);
-                vm.models.lists[vm.activeSprint.name] = vm.getStoriesBySprint(vm.activeSprint);
+                vm.backlogStoriesList = vm.getStoriesBySprint(vm.backlogSprint);
+                vm.sprintStoriesList = vm.getStoriesBySprint(vm.activeSprint);
             }
 
             function onError(error) {
@@ -74,10 +72,28 @@
             }
         }
 
-        function logEvent (message, list) {
-            console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        function backLogLogEvent (message, list) {
+            console.log("$$$$$$$$$Backlog");
             console.log(message, list);
-            console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            console.log("#############################");
+        }
+
+        function listBackloglogEvent (message, list) {
+            console.log("$$$$$$$$$listBackloglogEvent");
+            console.log(message, list);
+            console.log("#############################");
+        }
+
+        function activeSprintLogEvent (message, list) {
+            console.log("&&&&&&&&&&Active sprint");
+            console.log(message, list);
+            console.log("#############################");
+        }
+
+        function listSprintlogEvent (message, list) {
+            console.log("&&&&&&&&&&listSprintlogEvent");
+            console.log(message, list);
+            console.log("#############################");
         }
 
         function dropCallback (event, index, item, external, type, allowedType, items, listName) {
@@ -97,17 +113,5 @@
             // }
             return item;
         }
-
-        function logListEvent(action, event, index, external, type) {
-            var message = external ? 'External ' : '';
-            message += type + ' element is ' + action + ' position ' + index;
-            vm.logEvent(message, event);
-        }
-
-        function insertedCallback(list, item) {
-            console.log("list: ", list);
-            console.log("item: ", item);
-        }
-
     }
 })();
