@@ -1,0 +1,67 @@
+<form ng-submit="vm.updateStory()">
+    <div class="modal-header">
+        Assign story
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+            <p>{{vm.activity.description}}</p>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="assigned_to">
+                Assigned to
+                <span class="asteriskField">
+                    *
+                </span>
+            </label>
+            <select class="select form-control" id="assigned_to" name="assigned_to"
+                    ng-model="vm.engineer"
+                    ng-options="engineer.firstName + ' ' + engineer.lastName for engineer in vm.engineers">
+
+            </select>
+            <span class="help-block" id="hint_assigned_to">
+       Select an engineer
+      </span>
+        </div>
+        <div class="form-group ">
+            <label class="control-label requiredField" for="story_points">
+                Story points
+                <span class="asteriskField">
+                    *
+                </span>
+            </label>
+            <select class="select form-control" id="story_points" name="story_points"
+                    ng-model="vm.pointsAssigned"
+                    ng-options="points.points for points in vm.points">
+            </select>
+            <span class="help-block" id="hint_story_points">
+       Select the assigned story points
+      </span>
+        </div>
+        <div class="form-group ">
+            <label class="control-label requiredField" for="text">
+                Estimated time
+                <span class="asteriskField">
+                    *
+                </span>
+            </label>
+            <input class="form-control" id="text" name="text" type="text" ng-model="vm.estimatedTime"/>
+            <span class="help-block" id="hint_text">
+               Estimated time in hours
+            </span>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

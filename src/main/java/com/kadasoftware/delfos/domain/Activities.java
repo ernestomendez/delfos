@@ -54,7 +54,6 @@ public class Activities implements Serializable {
     @Field("creation_date")
     private LocalDate creationDate;
 
-    @NotNull
     @Field("estimated_time")
     private Integer estimatedTime;
 

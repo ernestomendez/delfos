@@ -75,9 +75,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("reset_date")
     private ZonedDateTime resetDate = null;
 
-    @Field
-    private Set<String> projects = new HashSet<>();
-
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
 
@@ -178,17 +175,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    public Set<String> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(final Set<String> projects) {
-        this.projects = projects;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, firstName, lastName, email, activated, projects);
+        return Objects.hash(id, login, firstName, lastName, email, activated);
     }
 
     @Override
@@ -205,8 +194,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             .equals(this.firstName, other.firstName) && Objects
             .equals(this.lastName, other.lastName) && Objects
             .equals(this.email, other.email) && Objects
-            .equals(this.activated, other.activated) && Objects
-            .equals(this.projects, other.projects);
+            .equals(this.activated, other.activated);
     }
 
     @Override
@@ -218,7 +206,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
                                         .append("langKey", langKey)
                                         .append("activationKey", activationKey)
                                         .append("resetKey", resetKey).append("resetDate", resetDate)
-                                        .append("projects", projects)
                                         .append("authorities", authorities).toString();
     }
 }

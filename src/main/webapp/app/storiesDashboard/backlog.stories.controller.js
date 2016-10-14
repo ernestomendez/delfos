@@ -8,9 +8,9 @@
         .module('delfosApp')
         .controller('BacklogStoriesController', BacklogStoriesController);
 
-    BacklogStoriesController.$inject = ['$scope', '$state', 'SharedData', 'Sprint', 'DateUtils', 'AlertService', 'Activities'];
+    BacklogStoriesController.$inject = ['$scope', '$state', 'SharedData', 'Sprint', 'DateUtils', 'AlertService', 'Activities', 'SharedActivity'];
 
-    function BacklogStoriesController($scope, $state, SharedData, Sprint, DateUtils, AlertService, Activities) {
+    function BacklogStoriesController($scope, $state, SharedData, Sprint, DateUtils, AlertService, Activities, SharedActivity) {
         var vm = this;
         vm.getActiveSprints = getActiveSprints;
         vm.SharedData = SharedData;
@@ -20,12 +20,10 @@
         vm.getStoriesBySprint = getStoriesBySprint;
         vm.backlogStoriesList = [];
         vm.sprintStoriesList = [];
-        vm.backLogLogEvent = backLogLogEvent;
-        vm.listBackloglogEvent = listBackloglogEvent;
-        vm.activeSprintLogEvent = activeSprintLogEvent;
-        vm.listSprintlogEvent = listSprintlogEvent;
-        vm.dropCallback = dropCallback;
         vm.selectedStory = null;
+        vm.movedStory = SharedActivity;
+        vm.setDestinationList = setDestinationList;
+        vm.moveActivity = moveActivity;
 
         function getActiveSprints() {
             var today = DateUtils.convertLocalDateToServer(new Date());
@@ -72,46 +70,50 @@
             }
         }
 
-        function backLogLogEvent (message, list) {
-            console.log("$$$$$$$$$Backlog");
-            console.log(message, list);
-            console.log("#############################");
+        function setDestinationList(listName) {
+            vm.destinationListName = listName;
         }
 
-        function listBackloglogEvent (message, list) {
-            console.log("$$$$$$$$$listBackloglogEvent");
-            console.log(message, list);
-            console.log("#############################");
+        function moveActivity(originListName, activity, index) {
+
+            if (vm.destinationListName != originListName) {
+
+                if (vm.destinationListName === 'backlog') {
+                    //TODO esto no debe ir aquí, estas duplicando código
+                    vm.movedStory.Activity = activity;
+                    updateStory();
+                    vm.sprintStoriesList.splice(index, 1);
+                } else {
+                    vm.backlogStoriesList.splice(index, 1);
+                    vm.movedStory.Activity = activity;
+                    vm.movedStory.Activity.sprintWeek = vm.activeSprint.name;
+                    $state.go('assignStory');
+                }
+            } else {
+                if (vm.destinationListName === 'backlog') {
+                    vm.backlogStoriesList.splice(index, 1);
+                } else {
+                    vm.sprintStoriesList.splice(index, 1);
+                }
+            }
+
         }
 
-        function activeSprintLogEvent (message, list) {
-            console.log("&&&&&&&&&&Active sprint");
-            console.log(message, list);
-            console.log("#############################");
+        function updateStory() {
+            vm.movedStory.Activity.assignedTo = null;
+            vm.movedStory.Activity.storyPoints = null;
+            vm.movedStory.Activity.estimatedTime = null;
+            vm.movedStory.Activity.sprintWeek = vm.backlogSprint.name;
+            //TODO Create constants for this magic status.
+            vm.movedStory.Activity.status = 'Proposed';
+
+            Activities.update(vm.movedStory.Activity, onSaveSuccess, onSaveError);
         }
 
-        function listSprintlogEvent (message, list) {
-            console.log("&&&&&&&&&&listSprintlogEvent");
-            console.log(message, list);
-            console.log("#############################");
+        function onSaveSuccess(result) {
         }
 
-        function dropCallback (event, index, item, external, type, allowedType, items, listName) {
-            console.log("event: ", event);
-            console.log("index: ", index);
-            console.log("item: ", item);
-            console.log("external: ", external);
-            console.log("type: ", type);
-            console.log("allowedType: ", allowedType);
-            console.log("items: ", items);
-            console.log("listName", listName);
-
-            // logListEvent('dropped at', event, index, external, type);
-            // if (external) {
-            //     if (allowedType === 'itemType' && !item.label) return false;
-            //     if (allowedType === 'containerType' && !angular.isArray(item)) return false;
-            // }
-            return item;
+        function onSaveError() {
         }
     }
 })();

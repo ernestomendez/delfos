@@ -10,14 +10,14 @@
                         </div>
                         <div class="panel-body">
                             <ul dnd-list="vm.backlogStoriesList"
-                                dnd-inserted="vm.backLogLogEvent('list Name: ', '{{vm.backlogSprint.name}}')">
+                                dnd-inserted="vm.setDestinationList('backlog')">
                                 <!-- The dnd-draggable directive makes an element draggable and will
                                      transfer the object that was assigned to it. If an element was
                                      dragged away, you have to remove it from the original list
                                      yourself using the dnd-moved attribute -->
                                 <li ng-repeat="item in vm.backlogStoriesList"
                                     dnd-draggable="item"
-                                    dnd-moved="vm.backlogStoriesList.splice($index, 1); vm.listBackloglogEvent('Item moved', '{{vm.backlogSprint.name}}')"
+                                    dnd-moved="vm.moveActivity('backlog', {{item}}, $index)"
                                     dnd-effect-allowed="move"
                                     dnd-selected="vm.selectedStory = item"
                                     ng-class="{'selected': vm.selectedStory === item}"
@@ -37,14 +37,14 @@
                         </div>
                         <div class="panel-body">
                             <ul dnd-list="vm.sprintStoriesList"
-                                dnd-inserted="vm.activeSprintLogEvent('list Name: ', '{{vm.activeSprint.name}}')">
+                                dnd-inserted="vm.setDestinationList('activeSprint')">
                                 <!-- The dnd-draggable directive makes an element draggable and will
                                      transfer the object that was assigned to it. If an element was
                                      dragged away, you have to remove it from the original list
                                      yourself using the dnd-moved attribute -->
                                 <li ng-repeat="item in vm.sprintStoriesList"
                                     dnd-draggable="item"
-                                    dnd-moved="vm.sprintStoriesList.splice($index, 1); vm.listSprintlogEvent('Item moved', '{{vm.activeSprint.name}}')"
+                                    dnd-moved="vm.moveActivity('activeSprint', {{item}}, $index)"
                                     dnd-effect-allowed="move"
                                     dnd-selected="vm.selectedStory = item"
                                     ng-class="{'selected': vm.selectedStory === item}"
@@ -59,9 +59,5 @@
             </fieldset>
 
         </div>
-        asdfasdfasd
-        {{vm.sprintStoriesList}}
-        ******************<br>
-        {{vm.backlogStoriesList}}
     </form>
 </div>

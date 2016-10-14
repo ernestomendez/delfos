@@ -5,5 +5,28 @@
         .module('delfosApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', true)
+        .constant('POINTS', [
+	{
+		"points": "1"
+	},
+	{
+		"points": "2"
+	},
+	{
+		"points": "3"
+	},
+	{
+		"points": "5"
+	},
+	{
+		"points": "8"
+	},
+	{
+		"points": "13"
+	},
+	{
+		"points": "20"
+	}
+])
 ;
 })();

@@ -116,7 +116,15 @@ gulp.task('ngconstant:dev', function () {
         name: 'delfosApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true
+            DEBUG_INFO_ENABLED: true,
+            POINTS: [
+            {"points" : "1"},
+            {"points" : "2"},
+            {"points" : "3"},
+            {"points" : "5"},
+            {"points" : "8"},
+            {"points": "13"},
+            {"points": "20"}]
         },
         template: config.constantTemplate,
         stream: true
@@ -130,7 +138,15 @@ gulp.task('ngconstant:prod', function () {
         name: 'delfosApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: false
+            DEBUG_INFO_ENABLED: false,
+            POINTS: [
+                {"points" : "1"},
+                {"points" : "2"},
+                {"points" : "3"},
+                {"points" : "5"},
+                {"points" : "8"},
+                {"points": "13"},
+                {"points": "20"}]
         },
         template: config.constantTemplate,
         stream: true

@@ -14,6 +14,12 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public interface ProjectsRepository extends MongoRepository<Projects,String> {
 
-    List<Projects> findAllByUsers(Set<UserForProject> users);
+    /**
+     * Finds all projects where a given user is part of.
+     *
+     * @param users user assigned to the project.
+     * @return list of projects.
+     */
+    List<Projects> findAllByUsersContaining(UserForProject users);
 
 }

@@ -1,6 +1,7 @@
 package com.kadasoftware.delfos.service;
 
 import com.kadasoftware.delfos.domain.Projects;
+import com.kadasoftware.delfos.domain.User;
 import com.kadasoftware.delfos.repository.ProjectsRepository;
 import com.kadasoftware.delfos.service.dto.UserDTO;
 import com.kadasoftware.delfos.service.dto.UserForProject;
@@ -80,13 +81,20 @@ public class ProjectsService {
         projectsRepository.delete(id);
     }
 
+    /**
+     * Finds all the projects where a user is assigned.
+     *
+     * @param login user to find.
+     * @return list of projects.
+     */
     public List<Projects> findAllByUser(String login) {
         log.debug("Request find Projects by login : {}", login);
         Assert.notNull(login, "login can not be null");
-        UserForProject userForProject = new UserForProject(userService.getUserWithAuthoritiesByLogin(login).get());
+        final User user = userService.getUserWithAuthoritiesByLogin(login).get();
+        Assert.notNull(user, "user can not be null");
 
-        Set<UserForProject> userDTOSet = new HashSet<>(1);
-        userDTOSet.add(userForProject);
-        return projectsRepository.findAllByUsers(userDTOSet);
+        UserForProject userForProject = new UserForProject(user);
+
+        return projectsRepository.findAllByUsersContaining(userForProject);
     }
 }
