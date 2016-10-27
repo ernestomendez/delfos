@@ -8,9 +8,9 @@
         .module('delfosApp')
         .controller('StoriesAssignController', StoriesAssignController);
 
-    StoriesAssignController.$inject = ['$scope', '$state', 'SharedData', 'AlertService', 'SharedActivity', '$uibModalInstance', 'Activities', 'POINTS'];
+    StoriesAssignController.$inject = ['$scope', '$state', 'SharedData', 'AlertService', 'SharedActivity', '$uibModalInstance', 'Activities', 'POINTS', 'BacklogStories'];
 
-    function StoriesAssignController($scope, $state, SharedData, AlertService, SharedActivity, $uibModalInstance, Activities, POINTS) {
+    function StoriesAssignController($scope, $state, SharedData, AlertService, SharedActivity, $uibModalInstance, Activities, POINTS, BacklogStories) {
         var vm = this;
         vm.clear = clear;
         vm.sharedData = SharedData;
@@ -34,7 +34,8 @@
             vm.activity.estimatedTime = vm.estimatedTime;
             vm.activity.status = 'Accepted';
 
-            Activities.update(vm.activity, onSaveSuccess, onSaveError);
+            // Activities.update(vm.activity, onSaveSuccess, onSaveError);
+            BacklogStories.assign(vm.activity, onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess (result) {

@@ -94,13 +94,8 @@
         <div class="form-group">
             <label class="control-label" translate="delfosApp.task.estimatedTime" for="field_estimatedTime">Estimated Time</label>
             <input type="number" class="form-control" name="estimatedTime" id="field_estimatedTime"
-                    ng-model="vm.task.estimatedTime"
-                    required />
+                    ng-model="vm.task.estimatedTime" />
             <div ng-show="editForm.estimatedTime.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.estimatedTime.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
                 <p class="help-block"
                     ng-show="editForm.estimatedTime.$error.number" translate="entity.validation.number">
                     This field should be a number.

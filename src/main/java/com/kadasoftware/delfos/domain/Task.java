@@ -47,7 +47,6 @@ public class Task implements Serializable {
     @Field("end_date")
     private LocalDate endDate;
 
-    @NotNull
     @Field("estimated_time")
     private Float estimatedTime;
 
@@ -57,6 +56,10 @@ public class Task implements Serializable {
     @NotNull
     @Field("activity")
     private String activity;
+
+    @NotNull
+    @Field("activity_id")
+    private String activityId;
 
     @NotNull
     @Field("cration_date")
@@ -191,13 +194,22 @@ public class Task implements Serializable {
         return activity;
     }
 
-    public Task activity(String activity) {
+    public Task activity(String activity, String activityId) {
         this.activity = activity;
+        this.activityId = activityId;
         return this;
     }
 
     public void setActivity(String activity) {
         this.activity = activity;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
     }
 
     public LocalDate getCrationDate() {

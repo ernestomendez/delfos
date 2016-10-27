@@ -147,7 +147,6 @@ public class AccountResourceIntTest {
             "joe@example.com",      // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -175,7 +174,6 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -203,7 +201,6 @@ public class AccountResourceIntTest {
             "invalid",          // e-mail <-- invalid
             true,               // activated
             "es",               // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,               // createdDate
             null,               // lastModifiedBy
@@ -231,7 +228,6 @@ public class AccountResourceIntTest {
             "bob@example.com",  // e-mail
             true,               // activated
             "es",               // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,               // createdDate
             null,               // lastModifiedBy
@@ -260,7 +256,6 @@ public class AccountResourceIntTest {
             "alice@example.com",    // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -269,7 +264,7 @@ public class AccountResourceIntTest {
 
         // Duplicate login, different e-mail
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
-            "alicejr@example.com", true, validUser.getLangKey(), new HashSet<>(), validUser.getAuthorities(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
+            "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
 
         // Good user
         restMvc.perform(
@@ -301,7 +296,6 @@ public class AccountResourceIntTest {
             "john@example.com",     // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -310,7 +304,7 @@ public class AccountResourceIntTest {
 
         // Duplicate e-mail, different login
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
-            validUser.getEmail(), true, validUser.getLangKey(), new HashSet<>(), validUser.getAuthorities(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
+            validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
 
         // Good user
         restMvc.perform(
@@ -341,7 +335,6 @@ public class AccountResourceIntTest {
             "badguy@example.com",   // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)),
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -369,7 +362,6 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(),         // projects
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
         );
 

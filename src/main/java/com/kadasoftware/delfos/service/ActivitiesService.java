@@ -80,9 +80,6 @@ public class ActivitiesService {
         log.debug("Request to get all the activities by project and sprint");
         Assert.notNull(project, "project can not be null");
         Assert.notNull(sprintId, "SprintId can not be null");
-        log.debug(project);
-        log.debug(sprintId);
-        log.debug("*********************************************************");
 
         return activitiesRepository.findAllByProjectAndSprintWeek(project, sprintId);
     }

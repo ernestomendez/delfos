@@ -60,7 +60,9 @@ public class TaskResourceIntTest {
     private static final LocalDate DEFAULT_CALCULATED_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CALCULATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final String DEFAULT_ACTIVITY = "AAAAA";
+    private static final String DEFAULT_ACTIVITY_ID = "123";
     private static final String UPDATED_ACTIVITY = "BBBBB";
+    private static final String UPDATED_ACTIVITY_ID = "123";
 
     private static final LocalDate DEFAULT_CRATION_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CRATION_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -109,7 +111,7 @@ public class TaskResourceIntTest {
                 .endDate(DEFAULT_END_DATE)
                 .estimatedTime(DEFAULT_ESTIMATED_TIME)
                 .calculatedEndDate(DEFAULT_CALCULATED_END_DATE)
-                .activity(DEFAULT_ACTIVITY)
+                .activity(DEFAULT_ACTIVITY, DEFAULT_ACTIVITY_ID)
                 .crationDate(DEFAULT_CRATION_DATE);
         return task;
     }
@@ -322,7 +324,7 @@ public class TaskResourceIntTest {
                 .endDate(UPDATED_END_DATE)
                 .estimatedTime(UPDATED_ESTIMATED_TIME)
                 .calculatedEndDate(UPDATED_CALCULATED_END_DATE)
-                .activity(UPDATED_ACTIVITY)
+                .activity(UPDATED_ACTIVITY, UPDATED_ACTIVITY_ID)
                 .crationDate(UPDATED_CRATION_DATE);
 
         restTaskMockMvc.perform(put("/api/tasks")
