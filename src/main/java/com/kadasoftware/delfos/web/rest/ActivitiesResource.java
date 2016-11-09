@@ -3,6 +3,7 @@ package com.kadasoftware.delfos.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.kadasoftware.delfos.domain.Activities;
 import com.kadasoftware.delfos.service.ActivitiesService;
+import com.kadasoftware.delfos.service.dto.ActivitiesDTO;
 import com.kadasoftware.delfos.web.rest.util.HeaderUtil;
 import com.kadasoftware.delfos.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -146,6 +147,20 @@ public class ActivitiesResource {
         Assert.notNull(sprintId, "Sprint can't be null");
 
         List<Activities> activities = activitiesService.findAllByProjectAndSprintId(project, sprintId);
+
+        return new ResponseEntity(activities, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{project}/{sprintId}/activities",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<ActivitiesDTO>> getActivitiesAndSubTasksBySprint(@PathVariable String project, @PathVariable String sprintId) {
+        log.debug("Request to get all activities by project and sprint");
+        Assert.notNull(project, "Project can't be null");
+        Assert.notNull(sprintId, "Sprint can't be null");
+
+        List<ActivitiesDTO> activities = activitiesService.findAllActivitiesAndSubTasksBySprint(project, sprintId);
 
         return new ResponseEntity(activities, HttpStatus.OK);
     }

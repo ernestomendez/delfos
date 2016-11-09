@@ -93,11 +93,26 @@ public class TaskService {
                 .name(taskName.getName())
                 .phase(taskName.getName())
                 .activity(story.getName(), story.getId())
-                .crationDate(LocalDate.now())
+                .creationDate(LocalDate.now())
                 .status(TaskStatus.New.name());
 
             this.save(task);
         });
+    }
 
+    /**
+     * Removes all sub tasks associated with the given story.
+     *
+     * @param story story to remove it's sub tasks.
+     */
+    public void deleteStorySubtasks(Activities story) {
+        log.debug("Removes all sub tasks associated with the given story");
+        Assert.notNull(story, "Story can not be null");
+
+        taskRepository.deleteAllByActivityId(story.getId());
+    }
+
+    public List<Task> findAllByActivityIdAndStatus(String activityId, TaskStatus taskStatus) {
+        return taskRepository.findAllByActivityIdAndStatus(activityId, taskStatus);
     }
 }

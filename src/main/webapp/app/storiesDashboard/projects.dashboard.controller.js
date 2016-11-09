@@ -50,16 +50,11 @@
 
 
         function goToNext() {
-            console.log(vm.sprint);
             if(vm.sprint === 'Backlog') {
-                console.log("backlog");
                 $state.go('backlogAssignStories',{project: vm.SharedData.Project.name});
             } else {
-                console.log("sprint");
-
+                $state.go('sprintDashBoard',{project: vm.SharedData.Project.name});
             }
-
-            // $state.go();
         }
 
     }

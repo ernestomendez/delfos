@@ -134,7 +134,7 @@
                                 estimatedTime: null,
                                 calculatedEndDate: null,
                                 activity: null,
-                                crationDate: null,
+                                creationDate: null,
                                 id: null
                             };
                         }

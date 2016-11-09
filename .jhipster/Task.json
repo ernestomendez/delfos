@@ -64,7 +64,7 @@
             ]
         },
         {
-            "fieldName": "crationDate",
+            "fieldName": "creationDate",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"

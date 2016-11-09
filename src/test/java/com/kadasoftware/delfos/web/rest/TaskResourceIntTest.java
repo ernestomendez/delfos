@@ -64,8 +64,8 @@ public class TaskResourceIntTest {
     private static final String UPDATED_ACTIVITY = "BBBBB";
     private static final String UPDATED_ACTIVITY_ID = "123";
 
-    private static final LocalDate DEFAULT_CRATION_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CRATION_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Inject
     private TaskRepository taskRepository;
@@ -112,7 +112,7 @@ public class TaskResourceIntTest {
                 .estimatedTime(DEFAULT_ESTIMATED_TIME)
                 .calculatedEndDate(DEFAULT_CALCULATED_END_DATE)
                 .activity(DEFAULT_ACTIVITY, DEFAULT_ACTIVITY_ID)
-                .crationDate(DEFAULT_CRATION_DATE);
+                .creationDate(DEFAULT_CREATION_DATE);
         return task;
     }
 
@@ -147,7 +147,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getEstimatedTime()).isEqualTo(DEFAULT_ESTIMATED_TIME);
         assertThat(testTask.getCalculatedEndDate()).isEqualTo(DEFAULT_CALCULATED_END_DATE);
         assertThat(testTask.getActivity()).isEqualTo(DEFAULT_ACTIVITY);
-        assertThat(testTask.getCrationDate()).isEqualTo(DEFAULT_CRATION_DATE);
+        assertThat(testTask.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
     }
 
     @Test
@@ -236,10 +236,10 @@ public class TaskResourceIntTest {
     }
 
     @Test
-    public void checkCrationDateIsRequired() throws Exception {
+    public void checkCreationDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = taskRepository.findAll().size();
         // set the field null
-        task.setCrationDate(null);
+        task.setCreationDate(null);
 
         // Create the Task, which fails.
 
@@ -272,7 +272,7 @@ public class TaskResourceIntTest {
                 .andExpect(jsonPath("$.[*].estimatedTime").value(hasItem(DEFAULT_ESTIMATED_TIME.doubleValue())))
                 .andExpect(jsonPath("$.[*].calculatedEndDate").value(hasItem(DEFAULT_CALCULATED_END_DATE.toString())))
                 .andExpect(jsonPath("$.[*].activity").value(hasItem(DEFAULT_ACTIVITY.toString())))
-                .andExpect(jsonPath("$.[*].crationDate").value(hasItem(DEFAULT_CRATION_DATE.toString())));
+                .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())));
     }
 
     @Test
@@ -295,7 +295,7 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.estimatedTime").value(DEFAULT_ESTIMATED_TIME.doubleValue()))
             .andExpect(jsonPath("$.calculatedEndDate").value(DEFAULT_CALCULATED_END_DATE.toString()))
             .andExpect(jsonPath("$.activity").value(DEFAULT_ACTIVITY.toString()))
-            .andExpect(jsonPath("$.crationDate").value(DEFAULT_CRATION_DATE.toString()));
+            .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()));
     }
 
     @Test
@@ -325,7 +325,7 @@ public class TaskResourceIntTest {
                 .estimatedTime(UPDATED_ESTIMATED_TIME)
                 .calculatedEndDate(UPDATED_CALCULATED_END_DATE)
                 .activity(UPDATED_ACTIVITY, UPDATED_ACTIVITY_ID)
-                .crationDate(UPDATED_CRATION_DATE);
+                .creationDate(UPDATED_CREATION_DATE);
 
         restTaskMockMvc.perform(put("/api/tasks")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -346,7 +346,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getEstimatedTime()).isEqualTo(UPDATED_ESTIMATED_TIME);
         assertThat(testTask.getCalculatedEndDate()).isEqualTo(UPDATED_CALCULATED_END_DATE);
         assertThat(testTask.getActivity()).isEqualTo(UPDATED_ACTIVITY);
-        assertThat(testTask.getCrationDate()).isEqualTo(UPDATED_CRATION_DATE);
+        assertThat(testTask.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
     }
 
     @Test

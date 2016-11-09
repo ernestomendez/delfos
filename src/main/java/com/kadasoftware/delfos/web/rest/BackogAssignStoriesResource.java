@@ -54,7 +54,12 @@ public class BackogAssignStoriesResource {
         if (activity.getId() != null) {
             assigned = activitiesService.save(activity);
 
-            taskService.createStorySubtasks(assigned);
+            if (null == assigned.getAssignedTo()) {
+                taskService.deleteStorySubtasks(assigned);
+            } else {
+                taskService.createStorySubtasks(assigned);
+            }
+
         } else {
             return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         }

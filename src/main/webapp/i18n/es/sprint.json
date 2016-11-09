@@ -1,6 +1,6 @@
 {
     "delfosApp": {
-        "sprint" : {
+        "sprint": {
             "home": {
                 "title": "Sprints",
                 "createLabel": "Crear nuevo Sprint",
@@ -20,6 +20,11 @@
             "startDate": "Start Date",
             "endDate": "End Date",
             "project": "Project"
+        },
+        "sprintDashBoard": {
+            "home": {
+                "title": "Sprint Dashboard"
+            }
         }
     }
 }

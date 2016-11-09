@@ -8,9 +8,9 @@
         .module('delfosApp')
         .controller('BacklogStoriesController', BacklogStoriesController);
 
-    BacklogStoriesController.$inject = ['$scope', '$state', 'SharedData', 'Sprint', 'DateUtils', 'AlertService', 'Activities', 'SharedActivity'];
+    BacklogStoriesController.$inject = ['$scope', '$state', 'SharedData', 'Sprint', 'DateUtils', 'AlertService', 'Activities', 'SharedActivity', 'BacklogStories'];
 
-    function BacklogStoriesController($scope, $state, SharedData, Sprint, DateUtils, AlertService, Activities, SharedActivity) {
+    function BacklogStoriesController($scope, $state, SharedData, Sprint, DateUtils, AlertService, Activities, SharedActivity, BacklogStories) {
         var vm = this;
         vm.getActiveSprints = getActiveSprints;
         vm.SharedData = SharedData;
@@ -107,7 +107,7 @@
             //TODO Create constants for this magic status.
             vm.movedStory.Activity.status = 'Proposed';
 
-            Activities.update(vm.movedStory.Activity, onSaveSuccess, onSaveError);
+            BacklogStories.assign(vm.movedStory.Activity, onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess(result) {

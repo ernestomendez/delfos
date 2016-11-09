@@ -1,7 +1,10 @@
 package com.kadasoftware.delfos.service;
 
 import com.kadasoftware.delfos.domain.Activities;
+import com.kadasoftware.delfos.domain.Task;
+import com.kadasoftware.delfos.domain.enumeration.TaskStatus;
 import com.kadasoftware.delfos.repository.ActivitiesRepository;
+import com.kadasoftware.delfos.service.dto.ActivitiesDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +26,9 @@ public class ActivitiesService {
 
     @Inject
     private ActivitiesRepository activitiesRepository;
+
+    @Inject
+    private TaskService taskService;
 
     /**
      * Save a activities.
@@ -82,5 +89,32 @@ public class ActivitiesService {
         Assert.notNull(sprintId, "SprintId can not be null");
 
         return activitiesRepository.findAllByProjectAndSprintWeek(project, sprintId);
+    }
+
+    public List<ActivitiesDTO> findAllActivitiesAndSubTasksBySprint(String project, String sprintId) {
+        log.debug("Request to get all the activities by project and sprint");
+        Assert.notNull(project, "project can not be null");
+        Assert.notNull(sprintId, "SprintId can not be null");
+
+        List<ActivitiesDTO> sprintActivities = new ArrayList<>();
+
+        final List<Activities> activitiesList = activitiesRepository.findAllByProjectAndSprintWeek(project, sprintId);
+
+        for (Activities activities : activitiesList) {
+            final List<Task> newTasks = taskService.findAllByActivityIdAndStatus(activities.getId(), TaskStatus.New);
+            final List<Task> workingTasks = taskService.findAllByActivityIdAndStatus(activities.getId(), TaskStatus.Working);
+            final List<Task> doneTasks = taskService.findAllByActivityIdAndStatus(activities.getId(), TaskStatus.Done);
+
+            final ActivitiesDTO activitiesDTO = new ActivitiesDTO();
+
+            activitiesDTO.setActivity(activities);
+            activitiesDTO.getNewTasks().addAll(newTasks);
+            activitiesDTO.getWorkingTasks().addAll(workingTasks);
+            activitiesDTO.getDoneTasks().addAll(doneTasks);
+
+            sprintActivities.add(activitiesDTO);
+        }
+
+        return sprintActivities;
     }
 }

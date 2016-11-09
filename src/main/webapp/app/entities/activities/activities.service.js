@@ -52,6 +52,25 @@
                     sprintId: null
                 },
                 isArray: true
+            },
+            'sprintDashboard': {
+                method: 'GET',
+                url: "api/:project/:sprintId/activities",
+                params: {
+                    project: null,
+                    sprintId: null
+                },
+                isArray: true,
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                        data.creationDate = DateUtils.convertLocalDateFromServer(data.creationDate);
+                        data.startDate = DateUtils.convertLocalDateFromServer(data.startDate);
+                        data.endDate = DateUtils.convertLocalDateFromServer(data.endDate);
+                        data.calculatedEndDate = DateUtils.convertLocalDateFromServer(data.calculatedEndDate);
+                    }
+                    return data;
+                }
             }
         });
     }

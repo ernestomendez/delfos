@@ -62,8 +62,8 @@ public class Task implements Serializable {
     private String activityId;
 
     @NotNull
-    @Field("cration_date")
-    private LocalDate crationDate;
+    @Field("creation_date")
+    private LocalDate creationDate;
 
     public String getId() {
         return id;
@@ -212,17 +212,17 @@ public class Task implements Serializable {
         this.activityId = activityId;
     }
 
-    public LocalDate getCrationDate() {
-        return crationDate;
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 
-    public Task crationDate(LocalDate crationDate) {
-        this.crationDate = crationDate;
+    public Task creationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
         return this;
     }
 
-    public void setCrationDate(LocalDate crationDate) {
-        this.crationDate = crationDate;
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override
@@ -259,7 +259,7 @@ public class Task implements Serializable {
             ", estimatedTime='" + estimatedTime + "'" +
             ", calculatedEndDate='" + calculatedEndDate + "'" +
             ", activity='" + activity + "'" +
-            ", crationDate='" + crationDate + "'" +
+            ", creationDate='" + creationDate + "'" +
             '}';
     }
 }

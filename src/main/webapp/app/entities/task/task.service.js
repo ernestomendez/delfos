@@ -19,7 +19,7 @@
                         data.startDate = DateUtils.convertLocalDateFromServer(data.startDate);
                         data.endDate = DateUtils.convertLocalDateFromServer(data.endDate);
                         data.calculatedEndDate = DateUtils.convertLocalDateFromServer(data.calculatedEndDate);
-                        data.crationDate = DateUtils.convertLocalDateFromServer(data.crationDate);
+                        data.creationDate = DateUtils.convertLocalDateFromServer(data.creationDate);
                     }
                     return data;
                 }
@@ -30,7 +30,7 @@
                     data.startDate = DateUtils.convertLocalDateToServer(data.startDate);
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
                     data.calculatedEndDate = DateUtils.convertLocalDateToServer(data.calculatedEndDate);
-                    data.crationDate = DateUtils.convertLocalDateToServer(data.crationDate);
+                    data.creationDate = DateUtils.convertLocalDateToServer(data.creationDate);
                     return angular.toJson(data);
                 }
             },
@@ -40,7 +40,7 @@
                     data.startDate = DateUtils.convertLocalDateToServer(data.startDate);
                     data.endDate = DateUtils.convertLocalDateToServer(data.endDate);
                     data.calculatedEndDate = DateUtils.convertLocalDateToServer(data.calculatedEndDate);
-                    data.crationDate = DateUtils.convertLocalDateToServer(data.crationDate);
+                    data.creationDate = DateUtils.convertLocalDateToServer(data.creationDate);
                     return angular.toJson(data);
                 }
             }

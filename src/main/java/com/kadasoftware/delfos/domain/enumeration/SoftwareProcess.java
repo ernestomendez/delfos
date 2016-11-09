@@ -9,8 +9,9 @@ public enum SoftwareProcess {
         CODING("Coding"),
         UNIT_TEST("Unit test"),
         CODE_REVIEW("Code review"),
+        UI_TESTING("UI testing"),
         FUNCTIONAL_TESTING("Functional testing"),
-        UI_TESTING("UI testing");
+        VALIDATION("Validation");
 
     private String name;
 

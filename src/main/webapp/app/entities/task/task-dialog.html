@@ -125,17 +125,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" translate="delfosApp.task.crationDate" for="field_crationDate">Cration Date</label>
+            <label class="control-label" translate="delfosApp.task.creationDate" for="field_creationDate">Creation Date</label>
                 <div class="input-group">
-                    <input id="field_crationDate" type="text" class="form-control" name="crationDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.crationDate" is-open="vm.datePickerOpenStatus.crationDate"
+                    <input id="field_creationDate" type="text" class="form-control" name="creationDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.task.creationDate" is-open="vm.datePickerOpenStatus.creationDate"
                     required/>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('crationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('creationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
-            <div ng-show="editForm.crationDate.$invalid">
+            <div ng-show="editForm.creationDate.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.crationDate.$error.required" translate="entity.validation.required">
+                    ng-show="editForm.creationDate.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>

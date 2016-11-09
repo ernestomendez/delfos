@@ -1,0 +1,95 @@
+<div>
+
+    <div class="row" ng-repeat="story in vm.sprintStoriesList | orderBy: 'activity.id' as orderedStories track by story.activity.id">
+        <div class="col-lg-12 delfos-story panel">
+            <div class="panel-heading">
+                {{story.activity.description}}
+            </div>
+
+            <div class="row simpleDemo">
+                <div class="col-xs-3 col-lg-3 delfos-lines panel">
+                    <div class="panel-heading">
+                        criterios de aceptacion.
+                    </div>
+                    <div class="panel-body">
+                        {{story.activity.acceptanceCriteria}}
+                    </div>
+                </div>
+                <div class="col-xs-3 col-lg-3 delfos-lines panel">
+                    <div class="panel-heading">
+                        New
+                    </div>
+                    <div class="panel-body">
+                        <ul dnd-list="story.newTasks"
+                            dnd-inserted="vm.setUpdatedStatus('New')">
+                            <!-- The dnd-draggable directive makes an element draggable and will
+                                 transfer the object that was assigned to it. If an element was
+                                 dragged away, you have to remove it from the original list
+                                 yourself using the dnd-moved attribute -->
+                            <li ng-repeat="item in story.newTasks"
+                                dnd-draggable="item"
+                                dnd-moved="vm.moveTasks('newTasks', {{item}}, $index); story.newTasks.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="vm.selectedStory = item"
+                                ng-class="{'selected': vm.selectedStory === item}"
+                                class="ng-binding ng-scope" draggable="true"
+                            >
+                                {{item.name}}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-xs-3 col-lg-3 delfos-lines panel">
+                    <div class="panel-heading">
+                        Working.
+                    </div>
+                    <div class="panel-body">
+                        <ul dnd-list="story.workingTasks"
+                            dnd-inserted="vm.setUpdatedStatus('Working')">
+                            <!-- The dnd-draggable directive makes an element draggable and will
+                                 transfer the object that was assigned to it. If an element was
+                                 dragged away, you have to remove it from the original list
+                                 yourself using the dnd-moved attribute -->
+                            <li ng-repeat="item in story.workingTasks"
+                                dnd-draggable="item"
+                                dnd-moved="vm.moveTasks('workingTasks', {{item}}, $index); story.workingTasks.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="vm.selectedStory = item"
+                                ng-class="{'selected': vm.selectedStory === item}"
+                                class="ng-binding ng-scope" draggable="true"
+                            >
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-lg-3 delfos-lines panel">
+                    <div class="panel-heading">
+                        Done.
+                    </div>
+                    <div class="panel-body">
+                        <ul dnd-list="story.doneTasks"
+                            dnd-inserted="vm.setUpdatedStatus('Done')">
+                            <!-- The dnd-draggable directive makes an element draggable and will
+                                 transfer the object that was assigned to it. If an element was
+                                 dragged away, you have to remove it from the original list
+                                 yourself using the dnd-moved attribute -->
+                            <li ng-repeat="item in story.doneTasks"
+                                dnd-draggable="item"
+                                dnd-moved="vm.moveTasks('doneTasks', {{item}}, $index)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="vm.selectedStory = item"
+                                ng-class="{'selected': vm.selectedStory === item}"
+                                class="ng-binding ng-scope" draggable="true"
+                            >
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
