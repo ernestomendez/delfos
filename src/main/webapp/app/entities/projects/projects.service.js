@@ -45,6 +45,13 @@
                     login: null
                 },
                 isArray: true
+            },
+            'byProjectName': {
+                method: 'GET',
+                url: 'api/sprintdashboard/project?name=:name',
+                params: {
+                    name: null
+                }
             }
         });
     }

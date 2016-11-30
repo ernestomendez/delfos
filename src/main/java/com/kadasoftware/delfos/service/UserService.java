@@ -184,6 +184,8 @@ public class UserService {
     }
 
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
+        log.debug("getUserWithAuthoritiesByLogin: ");
+        log.debug(login);
         return userRepository.findOneByLogin(login);
     }
 

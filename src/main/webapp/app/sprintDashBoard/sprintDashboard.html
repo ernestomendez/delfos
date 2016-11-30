@@ -1,18 +1,18 @@
 <div>
-
-    <div class="row" ng-repeat="story in vm.sprintStoriesList | orderBy: 'activity.id' as orderedStories track by story.activity.id">
+    <div class="row"
+         ng-repeat="story in vm.sprintStoriesList | orderBy: 'activity.id' as orderedStories track by story.activity.id">
         <div class="col-lg-12 delfos-story panel">
             <div class="panel-heading">
                 {{story.activity.description}}
             </div>
 
-            <div class="row simpleDemo">
+            <div class="row typesDemo">
                 <div class="col-xs-3 col-lg-3 delfos-lines panel">
                     <div class="panel-heading">
-                        criterios de aceptacion.
+                        <span translate="delfosApp.activities.acceptanceCriteria"></span>
                     </div>
                     <div class="panel-body">
-                        {{story.activity.acceptanceCriteria}}
+                        <span class="delfos-new-lines">{{story.activity.acceptanceCriteria}}</span>
                     </div>
                 </div>
                 <div class="col-xs-3 col-lg-3 delfos-lines panel">
@@ -21,20 +21,38 @@
                     </div>
                     <div class="panel-body">
                         <ul dnd-list="story.newTasks"
-                            dnd-inserted="vm.setUpdatedStatus('New')">
+                            dnd-drop="vm.dropCallback(item, story)"
+                            dnd-inserted="story.newTasks[index].status = 'New'; vm.setUpdatedStatus('New', index)"
+                            dnd-allowed-types="['New']"
+                            class="">
                             <!-- The dnd-draggable directive makes an element draggable and will
                                  transfer the object that was assigned to it. If an element was
                                  dragged away, you have to remove it from the original list
                                  yourself using the dnd-moved attribute -->
                             <li ng-repeat="item in story.newTasks"
+                                dnd-disable-if="item.assignedTo === null || vm.currentAccount != item.assignedTo || item.estimatedTime === null"
                                 dnd-draggable="item"
-                                dnd-moved="vm.moveTasks('newTasks', {{item}}, $index); story.newTasks.splice($index, 1)"
+                                dnd-type="item.status"
+                                dnd-dragstart="vm.dragStartCallback(story)"
+                                dnd-moved="vm.moveTasks('New', {{item}}, $index); story.newTasks.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 dnd-selected="vm.selectedStory = item"
                                 ng-class="{'selected': vm.selectedStory === item}"
                                 class="ng-binding ng-scope" draggable="true"
                             >
-                                {{item.name}}
+                                <dnd-nodrag ng-class="{'user-assigned': vm.currentAccount === item.assignedTo}">
+                                    <div class="row">
+                                        <div dnd-handle class="handle col-xs-10">
+                                            {{item.name}}
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-default" ui-sref="task-assign({id:item.id})"
+                                               role="button">
+                                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </dnd-nodrag>
                             </li>
                         </ul>
 
@@ -46,20 +64,40 @@
                     </div>
                     <div class="panel-body">
                         <ul dnd-list="story.workingTasks"
-                            dnd-inserted="vm.setUpdatedStatus('Working')">
+                            dnd-drop="vm.dropCallback(item, story)"
+                            dnd-inserted="story.workingTasks[index].status = 'Working'; vm.setUpdatedStatus('Working', index)"
+                            class="">
                             <!-- The dnd-draggable directive makes an element draggable and will
                                  transfer the object that was assigned to it. If an element was
                                  dragged away, you have to remove it from the original list
                                  yourself using the dnd-moved attribute -->
                             <li ng-repeat="item in story.workingTasks"
+                                dnd-disable-if="item.assignedTo === null || vm.currentAccount != item.assignedTo"
                                 dnd-draggable="item"
-                                dnd-moved="vm.moveTasks('workingTasks', {{item}}, $index); story.workingTasks.splice($index, 1)"
+                                dnd-type="item.status"
+                                dnd-dragstart="vm.dragStartCallback(story)"
+                                dnd-moved="vm.moveTasks('Working', {{item}}, $index, story.workingTasks); story.workingTasks.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 dnd-selected="vm.selectedStory = item"
                                 ng-class="{'selected': vm.selectedStory === item}"
                                 class="ng-binding ng-scope" draggable="true"
                             >
-                                {{item.name}}
+                                <dnd-nodrag ng-class="{'user-assigned': vm.currentAccount === item.assignedTo}">
+                                    <div class="row">
+                                        <div dnd-handle class="handle col-xs-10">
+                                            {{item.name}}
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-default" ui-sref="task-assign({id:item.id})"
+                                               role="button">
+                                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </dnd-nodrag>
+                            </li>
+                            <li class="dndPlaceholder">
+                                Drop any task here
                             </li>
                         </ul>
                     </div>
@@ -70,20 +108,41 @@
                     </div>
                     <div class="panel-body">
                         <ul dnd-list="story.doneTasks"
-                            dnd-inserted="vm.setUpdatedStatus('Done')">
+                            dnd-drop="vm.dropCallback(item, story)"
+                            dnd-inserted="story.doneTasks[index].status = 'Done'; vm.setUpdatedStatus('Done', index)"
+                            dnd-allowed-types="['Working']"
+                            class="">
                             <!-- The dnd-draggable directive makes an element draggable and will
                                  transfer the object that was assigned to it. If an element was
                                  dragged away, you have to remove it from the original list
                                  yourself using the dnd-moved attribute -->
                             <li ng-repeat="item in story.doneTasks"
+                                dnd-disable-if="item.assignedTo === null || vm.currentAccount != item.assignedTo"
                                 dnd-draggable="item"
-                                dnd-moved="vm.moveTasks('doneTasks', {{item}}, $index)"
+                                dnd-type="item.status"
+                                dnd-dragstart="vm.dragStartCallback(story)"
+                                dnd-moved="vm.moveTasks('Done', {{item}}, $index, story); story.doneTasks.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 dnd-selected="vm.selectedStory = item"
                                 ng-class="{'selected': vm.selectedStory === item}"
                                 class="ng-binding ng-scope" draggable="true"
                             >
-                                {{item.name}}
+                                <dnd-nodrag ng-class="{'user-assigned': vm.currentAccount === item.assignedTo}">
+                                    <div class="row">
+                                        <div dnd-handle class="handle col-xs-10">
+                                            {{item.name}}
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-default" ui-sref="task-assign({id:item.id})"
+                                               role="button">
+                                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </dnd-nodrag>
+                            </li>
+                            <li class="dndPlaceholder">
+                                Drop any task here
                             </li>
                         </ul>
                     </div>

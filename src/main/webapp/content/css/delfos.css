@@ -5,3 +5,9 @@ div .delfos-story {
 
 div .delfos-story .row .delfos-lines {
   border: outset #DCA184 5px; }
+
+div .delfos-new-lines {
+  white-space: pre-line; }
+
+.user-assigned {
+  background-color: #607D8B; }

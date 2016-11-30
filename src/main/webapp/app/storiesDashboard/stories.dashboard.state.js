@@ -17,7 +17,7 @@
             parent: 'app',
             url: '/',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN', 'ROLE_ENGINEER'],
                 pageTitle: 'delfosApp.dashboard.projects.title'
             },
             views: {

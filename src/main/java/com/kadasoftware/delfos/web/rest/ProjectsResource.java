@@ -140,7 +140,7 @@ public class ProjectsResource {
     }
 
     /**
-     * GET  /projects : get all the projects.
+     * GET  /storydashboard/projects : get all the projects for a given user.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of projects in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -154,6 +154,27 @@ public class ProjectsResource {
         log.debug("REST request to get all the  projects by a user");
         List<Projects> projects = projectsService.findAllByUser(login);
         return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /projects : get all the projects.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of projects in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/sprintdashboard/project",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Projects> getProjectByName(@RequestParam("name") String name)
+        throws URISyntaxException {
+        log.debug("REST request to get a project by it's name.");
+        Projects projects = projectsService.findOneByName(name);
+        return Optional.ofNullable(projects)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

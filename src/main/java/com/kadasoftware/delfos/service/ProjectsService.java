@@ -3,7 +3,6 @@ package com.kadasoftware.delfos.service;
 import com.kadasoftware.delfos.domain.Projects;
 import com.kadasoftware.delfos.domain.User;
 import com.kadasoftware.delfos.repository.ProjectsRepository;
-import com.kadasoftware.delfos.service.dto.UserDTO;
 import com.kadasoftware.delfos.service.dto.UserForProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +55,15 @@ public class ProjectsService {
     public Page<Projects> findAll(Pageable pageable) {
         log.debug("Request to get all Projects");
         Page<Projects> result = projectsRepository.findAll(pageable);
+        log.debug("///////////////////////////////////////////////////////////////////////////////////");
+        for (Projects projects : result) {
+            for (UserForProject userForProject : projects.getUsers()) {
+                log.debug(userForProject.toString());
+            }
+
+        }
+        log.debug("///////////////////////////////////////////////////////////////////////////////////");
+
         return result;
     }
 
@@ -95,6 +103,19 @@ public class ProjectsService {
 
         UserForProject userForProject = new UserForProject(user);
 
-        return projectsRepository.findAllByUsersContaining(userForProject);
+        return projectsRepository.findByUsersContaining(userForProject.getLogin());
+    }
+
+    /**
+     * Finds a project by it's name.
+     *
+     * @param name project name.
+     * @return a project with the given name.
+     */
+    public Projects findOneByName(String name) {
+        log.debug("Find a project by it's name.");
+        Assert.notNull(name, "Name can not be null");
+
+        return projectsRepository.findOneByName(name);
     }
 }
