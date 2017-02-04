@@ -45,7 +45,7 @@
             <select class="select form-control" id="assigned_to" name="assigned_to"
                     ng-model="vm.engineer"
                     ng-options="engineer.firstName + ' ' + engineer.lastName for engineer in vm.engineers"
-                    ng-disabled="vm.engineer != null && vm.task.status != 'New'">
+                    ng-disabled="vm.engineer != null && vm.task.status === 'Done'">
             </select>
             <span class="help-block" id="hint_assigned_to">
        Select an engineer

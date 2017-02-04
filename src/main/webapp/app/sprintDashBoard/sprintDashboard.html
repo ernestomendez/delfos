@@ -84,13 +84,19 @@
                             >
                                 <dnd-nodrag ng-class="{'user-assigned': vm.currentAccount === item.assignedTo}">
                                     <div class="row">
-                                        <div dnd-handle class="handle col-xs-10">
+                                        <div dnd-handle class="handle col-xs-8">
                                             {{item.name}}
                                         </div>
                                         <div class="col-xs-2">
                                             <a class="btn btn-default" ui-sref="task-assign({id:item.id})"
                                                role="button">
                                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-default" ui-sref="timeSheetView({project:vm.SharedData.Project.name,id:item.id})"
+                                               role="button">
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                                             </a>
                                         </div>
                                     </div>

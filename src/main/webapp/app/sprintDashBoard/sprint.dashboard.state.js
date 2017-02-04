@@ -60,9 +60,10 @@
                     }).result.then(function () {
                         $state.go('sprintDashBoard', {project: $stateParams.project}, {reload: true});
                     }, function () {
-                        $state.go('sprintDashBoard',{project: $stateParams.project}, {reload: true});
+                        // $state.go('sprintDashBoard',{project: $stateParams.project}, {reload: true});
+                        $state.go('^');
                     });
                 }]
-            })
+            });
     }
 })();
